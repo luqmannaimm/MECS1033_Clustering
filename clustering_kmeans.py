@@ -57,7 +57,6 @@ def load_seeds(csv_path: str) -> pd.DataFrame:
         if c not in df.columns:
             raise ValueError(f"Missing column '{c}'. Found: {list(df.columns)}")
 
-
     # Return features and dataframe
     return df
 
