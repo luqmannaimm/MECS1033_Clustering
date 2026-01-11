@@ -92,10 +92,10 @@ def compute_sed(a: np.ndarray, b: np.ndarray) -> float:
     diff = a - b
 
     # Compute SED
-    euc_dist_sq = float(np.dot(diff, diff))
+    sed = float(np.dot(diff, diff))
 
-    # Return squared Euclidean distance
-    return euc_dist_sq
+    # Return SED
+    return sed
 
 def compute_sse(X, labels, centroids) -> float:
     """Compute Sum of Squared Errors (SSE)"""
@@ -130,7 +130,11 @@ def choose_krot(n: int) -> int:
     return k_max
 
 def init_centroids_kmeanspp(X: np.ndarray, k: int, seed: int = 42) -> np.ndarray:
-    """Initialize centroids using k-means++ algorithm"""
+    """
+    Initialize centroids using K-Means++ algorithm
+    - Normal K-Means: randomly selects k data points as initial centroids.
+    - K-Means++: selects initial centroids to be distant from each other, improving convergence and clustering quality.
+    """
 
     # Set random seed
     randseed = random.Random(seed)
@@ -141,7 +145,7 @@ def init_centroids_kmeanspp(X: np.ndarray, k: int, seed: int = 42) -> np.ndarray
     # Initialize centroids list with one random point
     centroids = [X[randseed.randrange(n)].copy()]
 
-    # Select remaining k-1 centroids
+    # Select remaining centroids
     for _ in range(1, k):
 
         # Compute squared distances from each point to the nearest centroid
@@ -267,7 +271,7 @@ def run_kmeans(
     # Standardize features
     X_std, mean, std_safe = standardize_features(X_raw)
 
-    # Choose k using rule of thumb (if not provided)
+    # Choose k using rule of thumb (if not provided in cfg)
     k = cfg.k if cfg.k is not None else choose_krot(len(X_std))
 
     # Run k-means clustering
