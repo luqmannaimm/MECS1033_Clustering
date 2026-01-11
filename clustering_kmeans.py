@@ -154,7 +154,7 @@ def init_centroids_kmeanspp(X: np.ndarray, k: int, seed: int = 42) -> np.ndarray
         total = sum(dist_sq)
         r = randseed.random() * total
         
-        # Select next centroid
+        # Select next furthermost centroid 
         cumulative_dist = 0.0
         for i, d in enumerate(dist_sq):
             cumulative_dist += d
