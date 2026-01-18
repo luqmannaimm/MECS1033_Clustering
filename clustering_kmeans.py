@@ -212,10 +212,10 @@ def kmeans_clustering(
     """
     K-Means clustering algorithm
     X (np.ndarray)  : standardized data points
-    k (int)         : number of clusters
-    max_iters (int) : maximum number of iterations. 100 by default because it is common choice for k-means
-    tol (float)     : tolerance for convergence. 1e-6 by default because it is common choice for k-means
-    seed (int)      : random seed for centroid initialization. 42 by default for reproducibility
+    k (int)         : number of clusters. refer KMeansConfig class
+    max_iters (int) : maximum number of iterations. refer KMeansConfig class
+    tol (float)     : tolerance for convergence. refer KMeansConfig class
+    seed (int)      : random seed for centroid initialization. refer KMeansConfig class
     """
 
     # Initialize centroids
